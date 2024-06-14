@@ -17,7 +17,7 @@ export default function Login() {
     const onLogin = async () => {
         try {
             const response = await axios.post("/api/users/login", user)
-            console.log(response);
+            console.log("login succesfull",response);
             router.push("/")
         } catch (error: any) {
             console.log("login failed", error.message);

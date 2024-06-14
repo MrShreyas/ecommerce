@@ -1,7 +1,11 @@
 
 
 
+
 export default function LandingPageHeader() {
+
+    
+
     return(
         <>
             <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e8eef3] px-10 py-3">

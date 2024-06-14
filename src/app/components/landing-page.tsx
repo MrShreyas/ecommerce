@@ -1,9 +1,45 @@
+"use client"
+
+import axios from "axios";
 import Link from "next/link"
-import LandingPageHeader from "./landing-page-header"
+
+import { useEffect, useState } from "react"
+
 
 
 
 export default function LandingPage() {
+
+    let prodId;
+    const [items , setItems] = useState([{
+        color: "",
+        itemdescription: " ",
+        itemname: "",
+        price: "",
+        rating: "",
+        _id: "",
+    }]);
+
+
+    useEffect(() => {
+         async function getItems() {
+            try {
+                const response = await axios.get("/api/items/getitems")
+                console.log("response",response);
+                const data = response.data;
+                console.log("data",data);
+                setItems(data);
+                console.log("items",items);
+            } catch (error: any) {
+                console.log(error.message);
+                
+            }   
+        }
+        
+        getItems();
+    }, [])
+    
+    
     return(
         <>
             <div className="relative flex size-full min-h-screen flex-col bg-[#f8fafb] group/design-root overflow-x-hidden">
@@ -25,89 +61,25 @@ export default function LandingPage() {
                                 Elevate your wardrobe with our latest styles
                                 </h2>
                             </div>
-                            <Link href="/item-details"
-                                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#2c90e2] text-[#f8fafb] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
-                            >
-                                <span className="truncate">Shop Now</span>
-                            </Link>
+                            
                             </div>
                         </div>
                         </div>
                         <h2 className="text-[#0e151b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Women's Clothing</h2>
-                        <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Linen Sundress</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$120</p>
+                            {items.map((product, index) => 
+                            <div key={index}  className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+                                <div  className="flex flex-col gap-3 pb-3">
+                                    <div
+                                    className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                                    ></div>
+                                    <div>
+                                    <p  className="text-[#0e151b] text-base font-medium leading-normal">{product.itemname}</p>
+                                    <p  className="text-[#507695] text-sm font-normal leading-normal">{product.price}</p>
+                                    </div>
+                                    <Link href={`/item-details/${product._id}`}>see more</Link>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Silk Slip Dress</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$85</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Cotton Maxi Dress</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$95</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Denim Mini Skirt</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$60</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Ribbed Tank Top</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$30</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Chiffon Blouse</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$70</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Knit Cardigan</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$75</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 pb-3">
-                            <div
-                            className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                            ></div>
-                            <div>
-                            <p className="text-[#0e151b] text-base font-medium leading-normal">Pleated Midi Skirt</p>
-                            <p className="text-[#507695] text-sm font-normal leading-normal">$80</p>
-                            </div>
-                        </div>
-                        </div>
+                            )}
                     </div>
                     </div>
                 </div>
