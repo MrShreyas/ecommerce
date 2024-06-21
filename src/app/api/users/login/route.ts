@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
         const { username, password } = reqBody;
-        console.log(reqBody);
 
         const user = await User.findOne({ username });
         if (!user) {
@@ -18,7 +17,6 @@ export async function POST(request: NextRequest) {
                 { status: 400 }
                 );
         }
-        console.log("user exists ", user);
         if(password!=user.password)
             {
                 return NextResponse.json({ error: "Invalid passward" }, { status: 400 });

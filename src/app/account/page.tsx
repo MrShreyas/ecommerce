@@ -9,6 +9,19 @@ export default function Account() {
             <h1 className="text-[#111518] tracking-light text-[32px] font-bold leading-tight px-4 text-left pb-3 pt-6">Hello, Helen!</h1>
             <h2 className="text-[#111518] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Account</h2>
             <div className="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2 justify-between">
+              <div className="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2 justify-between">
+                <div className="flex flex-col justify-center">
+                  <p className="text-[#111518] text-base font-medium leading-normal line-clamp-1">UserName</p>
+                  <p className="text-[#60778a] text-sm font-normal leading-normal line-clamp-2">Helen</p>
+                </div>
+                <div className="shrink-0">
+                  <button
+                    className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f5] text-[#111518] text-sm font-medium leading-normal w-fit"
+                  >
+                    <span className="truncate">Change</span>
+                  </button>
+                </div>
+              </div>
               <div className="flex flex-col justify-center">
                 <p className="text-[#111518] text-base font-medium leading-normal line-clamp-1">Email</p>
                 <p className="text-[#60778a] text-sm font-normal leading-normal line-clamp-2">helen@gmail.com</p>

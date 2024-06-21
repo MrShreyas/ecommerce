@@ -1,6 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import { connect } from "@/DbConfig/DbConfig";
 import User from "@/model/userModel";
+import Cart from "@/model/cartModel";
+
 
 connect();
 
@@ -8,9 +10,8 @@ export async function POST(request: NextRequest) {
     try {
             const reqBody = await request.json();
             const { username, email, password ,firstname, lastname} = reqBody;
-            console.log("reqBody",reqBody);
 
-            const user = await User.findOne({ email });
+            const user = await User.findOne({ username });
             if (user) {
             return NextResponse.json(
                 { error: "User already exists" },
@@ -25,11 +26,18 @@ export async function POST(request: NextRequest) {
                 firstname,
                 lastname,
               });
-
-              console.log("newUser", newUser);
               
               const savedUser = await newUser.save();
-              console.log("saved User", savedUser);
+
+              const user1 = await User.findOne({ username });
+              const user_id = user1._id;
+              const cart = new Cart({
+                user_id
+              })
+              const savedCart = await cart.save();
+              console.log(savedCart);
+              
+
               return NextResponse.json({
                 message: "User created susscesfully",
                 success: true,

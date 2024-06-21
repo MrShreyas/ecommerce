@@ -3,7 +3,7 @@
 import axios from "axios";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { use, useState } from "react";
 
 export default function SignUp() {
 
@@ -18,13 +18,20 @@ export default function SignUp() {
       });
 
     const onSignup = async () => {
-        try {
-            const response = await axios.post("/api/users/signup", user)
-            console.log(response);
-            router.push("/login")
-        } catch (error: any) {
-            console.log("signup failed", error.message);
+
+        if (user.email!="" && user.password!="" && user.username!="" && user.firstname!="" && user.lastname!="") {
+            try {
+                const response = await axios.post("/api/users/signup", user)
+                console.log(response);
+                router.push("/login")
+            } catch (error: any) {
+                console.log("signup failed", error.message);
+            }
+        }else{
+            alert("Please fill all the fields");
         }
+
+        
         
     }
 
@@ -100,15 +107,7 @@ export default function SignUp() {
                             />
                         </label>
                         </div>
-                        <div className="px-4">
-                        <label className="flex gap-x-3 py-3 flex-row">
-                            <input
-                            type="checkbox"
-                            className="h-5 w-5 rounded border-[#d1dce6] border-2 bg-transparent text-[#2c90e2] checked:bg-[#2c90e2] checked:border-[#2c90e2] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#d1dce6] focus:outline-none"
-                            />
-                            <p className="text-[#0e151b] text-base font-normal leading-normal">Yes, I would like to receive marketing email from this company.</p>
-                        </label>
-                        </div>
+                        
                         <div className="flex px-4 py-3">
                         <button onClick={onSignup}
                             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#2c90e2] text-[#f8fafb] text-base font-bold leading-normal tracking-[0.015em]"
@@ -120,8 +119,8 @@ export default function SignUp() {
                     </div>
                     <footer className="flex justify-center">
                     <div className="flex max-w-[960px] flex-1 flex-col">
-                        <p className="text-[#507695] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">You are also agreeing to our Terms of Service and Privacy Policy.</p>
                         <Link href="/login" className="text-[#507695] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">Already have an account?</Link>
+                        <p className="text-[#507695] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">You are also agreeing to our Terms of Service and Privacy Policy.</p>
                     </div>
                     </footer>
                 </div>

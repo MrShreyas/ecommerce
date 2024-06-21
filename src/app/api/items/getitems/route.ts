@@ -14,7 +14,6 @@ export async function GET() {
             console.log("Item not found");
             
         }
-        console.log(item);
         return NextResponse.json(item);
     } catch (error:any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

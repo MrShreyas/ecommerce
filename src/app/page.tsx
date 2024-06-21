@@ -11,7 +11,7 @@ export default function Home() {
     const onLogout = async () => {
         const response = await axios.get("/api/users/logout");
         console.log(response);
-        router.push("/");
+        router.push("/login");
     }
 
 
